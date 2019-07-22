@@ -76,7 +76,7 @@
       </v-list>
     </v-menu>
     <v-spacer></v-spacer>
-    {{title}}{{ title ? ' - ' : '' }}教学资源开放平台管理{{ errored ? '(出现错误)' : '' }}
+    {{title}}{{ title ? ' - ' : '' }}{{ appName }}{{ errored ? '(出现错误)' : '' }}
     <v-spacer></v-spacer>
     <v-icon icon @click="minimize" style="-webkit-app-region: no-drag">mdi-minus</v-icon>
     <v-icon icon @click="maximize" style="-webkit-app-region: no-drag">mdi-plus</v-icon>
@@ -88,11 +88,14 @@
 import { minimize, maximize, close, devTools, openUrl } from '@/plugins/electron'
 import { bus } from '@/plugins/bus'
 
+/* global APP_NAME */
+
 export default {
   name: 'systemBar',
   data: () => ({
     title: '',
-    errored: false
+    errored: false,
+    appName: APP_NAME
   }),
   methods: {
     minimize () {

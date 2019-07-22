@@ -2,7 +2,7 @@
   <v-app>
     <system-bar></system-bar>
     <v-app-bar app>
-      <v-toolbar-title>教学资源开放平台管理</v-toolbar-title>
+      <v-toolbar-title>{{ appName }}</v-toolbar-title>
       <v-spacer />
       <v-toolbar-items>
         <v-btn text to="/">系统状态</v-btn>
@@ -16,7 +16,7 @@
 
     <v-footer app padless>
       <v-flex text-center xs12>
-        Ver {{ version }}
+        Ver {{ build.version }}.{{ build.hash }}-{{ build.branch }}
       </v-flex>
     </v-footer>
 
@@ -33,6 +33,8 @@ import systemBar from '@/components/systembar'
 import { remote } from '@/plugins/electron'
 import { version } from '@/../package.json'
 
+/* global APP_NAME, GIT_HASH, GIT_BRANCH */
+
 export default {
   name: 'App',
   components: {
@@ -44,7 +46,12 @@ export default {
     loadLog: [],
     toast: '',
     snackbar: false,
-    version
+    appName: APP_NAME,
+    build: {
+      version,
+      hash: GIT_HASH,
+      branch: GIT_BRANCH
+    }
   }),
   methods: {
     showToast (text) {
