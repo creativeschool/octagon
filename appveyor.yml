@@ -21,10 +21,12 @@ init:
 
 install:
   - ps: Install-Product node 12 x64
+  - npm i -g npm
+  - npm i -g yarn
   - yarn
 
 build_script:
   - yarn generate-icons
-  - yarn build -p always
+  - yarn build
 
 test: off

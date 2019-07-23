@@ -1,6 +1,7 @@
 {
   "name": "octagon",
   "version": "0.1.1",
+  "description": "Management App for HEXAGON",
   "private": true,
   "scripts": {
     "lint": "vue-cli-service lint",
