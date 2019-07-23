@@ -74,27 +74,34 @@ export default {
     verify () {
       this.errors = []
       this.loading = true
-      connection.then(async ctx => {
-        for (const o of this.data) {
-          if (await ctx.courses.find({ name: o.name }).count()) {
-            this.errors.push({ name: o.name })
+      connection
+        .then(ctx => Promise.all(this.data.map(o => ctx.courses.findOne({ name: o.name }))))
+        .then(exists => {
+          for (let i = 0; i < exists.length; i++) {
+            if (exists[i]) {
+              this.errors.push({ name: this.data[i].name })
+            }
           }
-        }
-        bus.$emit('toast', `验证成功！发现${this.errors.length}个冲突文档`)
-      }).finally(() => { this.loading = false })
+          bus.$emit('toast', `验证成功！发现${this.errors.length}个冲突文档`)
+        })
+        .finally(() => {
+          this.loading = false
+        })
     },
     submit () {
       this.loading = true
-      connection.then(async ctx => {
-        const result = await ctx.courses.insertMany(this.data)
-        console.log(result)
-        bus.$emit('toast', `导入成功！共导入${result.insertedCount}个文档`)
-      }).finally(() => {
-        this.loading = false
-        this.data = []
-        this.errors = []
-        this.store = null
-      })
+      connection
+        .then(ctx => ctx.courses.insertMany(this.data))
+        .then(result => {
+          console.log(result)
+          bus.$emit('toast', `导入成功！共导入${result.insertedCount}个文档`)
+        })
+        .finally(() => {
+          this.loading = false
+          this.data = []
+          this.errors = []
+          this.store = null
+        })
     }
   },
   created () {

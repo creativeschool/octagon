@@ -38,11 +38,15 @@ export default {
   }),
   created () {
     bus.$emit('title', '文件信息')
-    connection.then(async ctx => {
-      this.loading = false
-      this.fileCount = await ctx.files.countDocuments()
-      this.uniqueFileCount = await ctx.fs.find().count()
-    })
+    connection
+      .then(ctx => [ctx.files.countDocuments(), ctx.fs.find().count()])
+      .then(counts => {
+        this.fileCount = counts[0]
+        this.uniqueFileCount = counts[1]
+      })
+      .finally(() => {
+        this.loading = false
+      })
   }
 }
 </script>

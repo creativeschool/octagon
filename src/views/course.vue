@@ -86,10 +86,14 @@ export default {
   }),
   created () {
     bus.$emit('title', '课程查询')
-    connection.then(async ctx => {
-      this.courseCount = await ctx.courses.countDocuments()
-      this.loading = false
-    })
+    connection
+      .then(ctx => ctx.courses.countDocuments())
+      .then(count => {
+        this.courseCount = count
+      })
+      .finally(() => {
+        this.loading = false
+      })
   },
   methods: {
     loadList () {
@@ -107,9 +111,10 @@ export default {
           }
         }
       }
-      connection.then(async ctx => {
-        this.courses = await ctx.courses.find(query).toArray()
-      }).finally(() => { this.loading = false })
+      connection
+        .then(ctx => ctx.courses.find(query).toArray())
+        .then(arr => { this.courses = arr })
+        .finally(() => { this.loading = false })
     },
     formatDate
   }

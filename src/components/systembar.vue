@@ -11,6 +11,9 @@
         <v-list-item @click="devTools">
           <v-list-item-title>开发者工具</v-list-item-title>
         </v-list-item>
+        <v-list-item @click="restart">
+          <v-list-item-title>重启</v-list-item-title>
+        </v-list-item>
         <v-list-item @click="close">
           <v-list-item-title>退出</v-list-item-title>
         </v-list-item>
@@ -50,6 +53,9 @@
         <v-list-item to="/ucmap" exact>
           <v-list-item-title>用户课程关联信息</v-list-item-title>
         </v-list-item>
+        <v-list-item to="/ucmap/import" exact>
+          <v-list-item-title>用户课程关联信息</v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-menu>
     <v-menu offset-y>
@@ -85,7 +91,7 @@
 </template>
 
 <script>
-import { minimize, maximize, close, devTools, openUrl } from '@/plugins/electron'
+import { minimize, maximize, close, devTools, restart, openUrl } from '@/plugins/electron'
 import { bus } from '@/plugins/bus'
 
 /* global APP_NAME */
@@ -98,19 +104,11 @@ export default {
     appName: APP_NAME
   }),
   methods: {
-    minimize () {
-      minimize()
-    },
-    maximize () {
-      maximize()
-    },
-    close () {
-      close()
-    },
-    devTools () {
-      bus.$emit('toast', '仅供开发人员使用')
-      devTools()
-    },
+    minimize,
+    maximize,
+    close,
+    devTools,
+    restart,
     openUrl
   },
   created () {

@@ -33,10 +33,14 @@ export default {
   }),
   created () {
     bus.$emit('title', '用户课程关联')
-    connection.then(async ctx => {
-      this.loading = false
-      this.ucmapCount = await ctx.ucmap.countDocuments()
-    })
+    connection
+      .then(ctx => ctx.ucmap.countDocuments())
+      .then(count => {
+        this.ucmapCount = count
+      })
+      .finally(() => {
+        this.loading = false
+      })
   }
 }
 </script>

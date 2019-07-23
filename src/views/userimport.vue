@@ -76,27 +76,33 @@ export default {
     verify () {
       this.errors = []
       this.loading = true
-      connection.then(async ctx => {
-        for (const o of this.data) {
-          if (await ctx.users.find({ login: o.login }).count()) {
-            this.errors.push({ name: o.name, login: o.login })
+      connection
+        .then(ctx => Promise.all(this.data.map(o => ctx.users.findOne({ login: o.login }))))
+        .then(exists => {
+          for (let i = 0; i < exists.length; i++) {
+            if (exists[i]) {
+              this.errors.push({ name: this.data[i].name, login: this.data[i].login })
+            }
           }
-        }
-        bus.$emit('toast', `验证成功！发现${this.errors.length}个冲突文档`)
-      }).finally(() => { this.loading = false })
+          bus.$emit('toast', `验证成功！发现${this.errors.length}个冲突文档`)
+        })
+        .finally(() => {
+          this.loading = false
+        })
     },
     submit () {
       this.loading = true
-      connection.then(async ctx => {
-        const result = await ctx.users.insertMany(this.data)
-        console.log(result)
-        bus.$emit('toast', `导入成功！共导入${result.insertedCount}个文档`)
-      }).finally(() => {
-        this.loading = false
-        this.data = []
-        this.errors = []
-        this.store = null
-      })
+      connection
+        .then(ctx => ctx.users.insertMany(this.data))
+        .then(result => {
+          console.log(result)
+          bus.$emit('toast', `导入成功！共导入${result.insertedCount}个文档`)
+        }).finally(() => {
+          this.loading = false
+          this.data = []
+          this.errors = []
+          this.store = null
+        })
     }
   }
 }

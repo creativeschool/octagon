@@ -15,37 +15,34 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
       component: home
     },
     {
       path: '/user',
-      name: 'user',
       component: user
     },
     {
       path: '/user/import',
-      name: 'userImport',
       component: userImport
     },
     {
       path: '/course',
-      name: 'course',
       component: course
     },
     {
       path: '/course/import',
-      name: 'courseImport',
       component: courseImport
     },
     {
       path: '/file',
-      name: 'file',
       component: file
     },
     {
       path: '/ucmap',
-      name: 'ucmap',
+      component: ucmap
+    },
+    {
+      path: '/ucmap/import',
       component: ucmap
     }
   ]

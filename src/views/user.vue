@@ -93,10 +93,14 @@ export default {
   }),
   created () {
     bus.$emit('title', '用户查询')
-    connection.then(async ctx => {
-      this.userCount = await ctx.users.countDocuments()
-      this.loading = false
-    })
+    connection
+      .then(ctx => ctx.users.countDocuments())
+      .then(count => {
+        this.userCount = count
+      })
+      .finally(() => {
+        this.loading = false
+      })
   },
   methods: {
     loadList () {
@@ -114,9 +118,13 @@ export default {
           }
         }
       }
-      connection.then(async ctx => {
-        this.users = await ctx.users.find(query).toArray()
-      }).finally(() => { this.loading = false })
+      connection
+        .then(ctx => ctx.users.find(query).toArray())
+        .then(users => {
+          this.users = users
+        }).finally(() => {
+          this.loading = false
+        })
     },
     formatDate
   }
