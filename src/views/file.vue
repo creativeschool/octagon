@@ -39,7 +39,7 @@ export default {
   created () {
     bus.$emit('title', '文件信息')
     connection
-      .then(ctx => [ctx.files.countDocuments(), ctx.fs.find().count()])
+      .then(ctx => Promise.all([ctx.files.countDocuments(), ctx.fs.find().count()]))
       .then(counts => {
         this.fileCount = counts[0]
         this.uniqueFileCount = counts[1]

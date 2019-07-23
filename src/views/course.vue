@@ -47,13 +47,16 @@
             {{ item.tags.join(', ') }}
           </template>
           <template v-slot:item._actions="{ item }">
-            <v-btn icon :to="'user/edit/' + item._id">
+            <v-btn icon @click="dialogId = item._id, dialog = true">
               <v-icon>mdi-pencil</v-icon>
             </v-btn>
           </template>
         </v-data-table>
       </v-card>
     </v-flex>
+    <v-dialog v-model="dialog">
+      <course-edit :id="dialogId" v-if="dialog" @update="loadList"/>
+    </v-dialog>
   </v-layout>
 </template>
 
@@ -61,12 +64,18 @@
 import { connection } from '@/db/index'
 import { formatDate } from '@/plugins/formatter'
 import { bus } from '@/plugins/bus'
+import courseEdit from '@/components/courseedit.vue'
 
 export default {
   name: 'course',
+  components: {
+    courseEdit
+  },
   data: () => ({
     loading: true,
     courseCount: NaN,
+    dialog: false,
+    dialogId: null,
     courses: [],
     headers: [
       { text: '名称', value: 'name' },

@@ -51,27 +51,36 @@
             {{ item.tags.join(', ') }}
           </template>
           <template v-slot:item._actions="{ item }">
-            <v-btn icon>
+            <v-btn icon @click="dialogId = item._id, dialog = true">
               <v-icon>mdi-pencil</v-icon>
             </v-btn>
           </template>
         </v-data-table>
       </v-card>
     </v-flex>
+    <v-dialog v-model="dialog">
+      <user-edit v-if="dialog" :id="dialogId"/>
+    </v-dialog>
   </v-layout>
 </template>
 
 <script>
 import { connection } from '@/db/index'
 import { formatDate } from '@/plugins/formatter'
-import escape from 'escape-string-regexp'
 import { bus } from '@/plugins/bus'
+import escape from 'escape-string-regexp'
+import userEdit from '@/components/useredit.vue'
 
 export default {
   name: 'user',
+  components: {
+    userEdit
+  },
   data: () => ({
     loading: true,
     userCount: NaN,
+    dialog: false,
+    dialogId: null,
     users: [],
     headers: [
       { text: '名称', value: 'name' },
