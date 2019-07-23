@@ -7,6 +7,7 @@ import course from '@/views/course.vue'
 import courseImport from '@/views/courseimport.vue'
 import file from '@/views/file.vue'
 import ucmap from '@/views/ucmap.vue'
+import ucmapImport from '@/views/ucmapimport.vue'
 
 Vue.use(Router)
 
@@ -43,7 +44,7 @@ export default new Router({
     },
     {
       path: '/ucmap/import',
-      component: ucmap
+      component: ucmapImport
     }
   ]
 })

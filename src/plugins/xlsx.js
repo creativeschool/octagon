@@ -1,5 +1,6 @@
 import XLSX from 'xlsx'
 import { isRawUser, isRawCourse } from './ajv'
+import { connection } from '@/db'
 
 const { randomBytes, pbkdf2Sync } = require('crypto')
 const cryptoRandomString = require('crypto-random-string')
@@ -103,4 +104,37 @@ export const saveCourseImport = (path, data) => {
   }))), '导出')
   console.log(`Export to ${path}`)
   XLSX.writeFile(book, path)
+}
+
+export const parseUCmapImport = async (path, present) => {
+  const { users, courses } = await connection
+  const book = XLSX.readFile(path)
+  const sheet = book.Sheets[book.SheetNames[0]]
+  const raw = XLSX.utils.sheet_to_json(sheet, { header: 1 })
+  const userIds = new Map()
+  const courseIds = new Map()
+  const data = []
+  for (const row of raw) {
+    if (row.length < 2) continue
+    const now = +new Date()
+    const login = row[0]
+    if (!userIds.has(login)) {
+      userIds.set(login, await users.findOne({ login }))
+    }
+    const user = userIds.get(login)._id
+    for (let i = 1; i < row.length; i++) {
+      const name = row[i]
+      if (!courseIds.has(name)) {
+        courseIds.set(name, await courses.findOne({ name }))
+      }
+      const course = courseIds.get(name)._id
+      const priv = { scope: '', msg: false }
+      switch (present) {
+        case '学生': priv.scope = '/' + userIds.get(login).name; break
+        case '教师': priv.scope = '/'; priv.msg = true; break
+      }
+      data.push({ user, course, priv, created: now, updated: now })
+    }
+  }
+  return data
 }

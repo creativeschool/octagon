@@ -440,6 +440,13 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
+"@types/bson@*":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@types/bson/-/bson-4.0.0.tgz#9073772679d749116eb1dfca56f8eaac6d59cc7a"
+  integrity sha512-pq/rqJwJWkbS10crsG5bgnrisL8pML79KlMKQMoQwLUjlPAkrUHMvHJ3oGwE7WHR61Lv/nadMwXVAD2b+fpD8Q==
+  dependencies:
+    "@types/node" "*"
+
 "@types/debug@^4.1.4":
   version "4.1.4"
   resolved "https://registry.npm.taobao.org/@types/debug/download/@types/debug-4.1.4.tgz#56eec47706f0fd0b7c694eae2f3172e6b0b769da"
@@ -464,6 +471,14 @@
   resolved "https://registry.npm.taobao.org/@types/minimatch/download/@types/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
   integrity sha1-PcoOPzOyAPx9ETnAzZbBJoyt/Z0=
 
+"@types/mongodb@^3.1.29":
+  version "3.1.29"
+  resolved "https://registry.yarnpkg.com/@types/mongodb/-/mongodb-3.1.29.tgz#28b119b2f983dc35da4fe9883c9934cc04121f65"
+  integrity sha512-X74BBsFQruQXVJif2oJ08uceUfAVSkb2gl6Zm07fgqKQHnTdxIW3vknHNpQahogezX42EPQv9A+dYG0+CFY8aA==
+  dependencies:
+    "@types/bson" "*"
+    "@types/node" "*"
+
 "@types/node@*":
   version "12.6.8"
   resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-12.6.8.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fnode%2Fdownload%2F%40types%2Fnode-12.6.8.tgz#e469b4bf9d1c9832aee4907ba8a051494357c12c"
@@ -473,6 +488,11 @@
   version "10.14.13"
   resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-10.14.13.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fnode%2Fdownload%2F%40types%2Fnode-10.14.13.tgz#ac786d623860adf39a3f51d629480aacd6a6eec7"
   integrity sha1-rHhtYjhgrfOaP1HWKUgKrNam7sc=
+
+"@types/node@^12.6.8":
+  version "12.6.8"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.6.8.tgz#e469b4bf9d1c9832aee4907ba8a051494357c12c"
+  integrity sha512-aX+gFgA5GHcDi89KG5keey2zf0WfZk/HAQotEamsK2kbey+8yGKcson0hbK8E+v0NArlCJQCqMP161YhV6ZXLg==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"

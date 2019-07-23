@@ -54,7 +54,7 @@
           <v-list-item-title>用户课程关联信息</v-list-item-title>
         </v-list-item>
         <v-list-item to="/ucmap/import" exact>
-          <v-list-item-title>用户课程关联信息</v-list-item-title>
+          <v-list-item-title>导入</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
