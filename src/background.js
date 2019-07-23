@@ -1,5 +1,6 @@
 'use strict'
 
+import { autoUpdater } from 'electron-updater'
 import { app, protocol, BrowserWindow } from 'electron'
 import { createProtocol, installVueDevtools } from 'vue-cli-plugin-electron-builder/lib'
 import path from 'path'
@@ -59,6 +60,7 @@ app.on('ready', async () => {
     }
   }
   createWindow()
+  autoUpdater.checkForUpdatesAndNotify()
 })
 
 if (isDevelopment) {

@@ -15,6 +15,7 @@
     "@mdi/font": "^3.8.95",
     "ajv": "^6.10.2",
     "crypto-random-string": "^3.0.1",
+    "electron-updater": "^4.1.2",
     "escape-string-regexp": "^2.0.0",
     "material-design-icons-iconfont": "^5.0.1",
     "mongodb": "^3.3.0-beta2",
