@@ -3,5 +3,6 @@
 </p>
 
 # Octagon
+![AppVeyor](https://img.shields.io/appveyor/ci/ZhangZisu/octagon.svg?logo=appveyor&logoColor=white&style=flat-square)
 
 [文档](/doc)
