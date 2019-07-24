@@ -22,6 +22,7 @@ install:
   - yarn
 
 script:
+  - yarn generate-icons
   - yarn build
 
 cache:
