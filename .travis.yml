@@ -1,0 +1,26 @@
+branches:
+  only:
+    - master
+
+os:
+  - linux
+
+language: node_js
+
+node_js:
+  - "12"
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install --no-install-recommends -y libopenjp2-tools
+  - sudo apt-get install --no-install-recommends -y rpm
+  - sudo apt-get install --no-install-recommends -y bsdtar
+
+install:
+  - yarn
+
+script:
+  - yarn build
+
+cache:
+  yarn: true

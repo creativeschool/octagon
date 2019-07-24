@@ -1,6 +1,6 @@
 <template>
-  <v-layout>
-    <v-flex xs12>
+  <v-layout wrap>
+    <v-flex xs12 class="pa-2">
       <v-card>
         <v-card-text>
           驱动版本： {{ clientInfo.driver }}<br/>
@@ -13,6 +13,14 @@
         </v-overlay>
       </v-card>
     </v-flex>
+    <v-flex xs12 class="pa-2">
+      <v-card>
+        <v-card-text>
+          构建时间： {{ build.date }}<br/>
+          构建机器： {{ build.machine }}<br/>
+        </v-card-text>
+      </v-card>
+    </v-flex>
   </v-layout>
 </template>
 
@@ -20,11 +28,17 @@
 import { connection } from '@/db/index'
 import { bus } from '@/plugins/bus'
 
+/* global BUILD_DATE, BUILD_MACHINE */
+
 export default {
   name: 'home',
   data: () => ({
     loading: true,
-    clientInfo: {}
+    clientInfo: {},
+    build: {
+      date: BUILD_DATE,
+      machine: BUILD_MACHINE
+    }
   }),
   created () {
     bus.$emit('title', '')
