@@ -1,5 +1,13 @@
 <template>
-  <v-layout wrap>
+  <v-layout wrap align-content-start>
+    <v-flex xs12 class="pa-2">
+      <v-card>
+        <v-card-text>
+          构建时间： {{ build.date }}<br/>
+          构建机器： {{ build.machine }}<br/>
+        </v-card-text>
+      </v-card>
+    </v-flex>
     <v-flex xs12 class="pa-2">
       <v-card>
         <v-card-text>
@@ -11,14 +19,6 @@
           <v-progress-circular indeterminate/>
           等待数据库连接
         </v-overlay>
-      </v-card>
-    </v-flex>
-    <v-flex xs12 class="pa-2">
-      <v-card>
-        <v-card-text>
-          构建时间： {{ build.date }}<br/>
-          构建机器： {{ build.machine }}<br/>
-        </v-card-text>
       </v-card>
     </v-flex>
   </v-layout>
