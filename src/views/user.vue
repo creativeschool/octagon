@@ -12,17 +12,13 @@
             </tbody>
           </v-simple-table>
         </v-card-text>
-        <v-overlay absolute :value="loading">
-          <v-progress-circular indeterminate/>
-          等待操作
-        </v-overlay>
       </v-card>
     </v-flex>
     <v-flex xs12 class="mb-2">
       <v-card>
         <v-card-text>
           <v-layout row justify-start>
-            <v-btn color="error" class="ma-2" @click="loadList">查询</v-btn>
+            <v-btn color="error" class="ma-2" @click="loadList" :loading="loading">查询</v-btn>
             <v-checkbox v-model="filter" label="启用筛选"></v-checkbox>
           </v-layout>
         </v-card-text>
