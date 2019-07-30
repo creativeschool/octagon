@@ -22,7 +22,7 @@
     "mongodb": "^3.3.0-beta2",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
-    "vuetify": "^2.0.0",
+    "vuetify": "^2.0.2",
     "xlsx": "^0.14.4"
   },
   "devDependencies": {
