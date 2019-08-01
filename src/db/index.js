@@ -15,7 +15,8 @@ const connect = async () => {
   const files = db.collection('files')
   const msgs = db.collection('msgs')
   const tokens = db.collection('tokens')
-  return { client, db, fs, users, courses, ucmap, files, msgs, tokens }
+  const notices = db.collection('notices')
+  return { client, db, fs, users, courses, ucmap, files, msgs, tokens, notices }
 }
 
 export const connection = connect()

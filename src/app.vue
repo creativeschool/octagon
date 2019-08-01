@@ -1,15 +1,17 @@
 <template>
   <v-app>
     <system-bar></system-bar>
+
     <v-app-bar app>
       <v-toolbar-title>{{ appName }}</v-toolbar-title>
       <v-spacer />
       <v-toolbar-items>
-        <v-btn text to="/">系统状态</v-btn>
+        <v-btn text to="/">首页</v-btn>
       </v-toolbar-items>
     </v-app-bar>
+
     <v-content>
-      <v-container fluid fill-height>
+      <v-container fluid fill-height grid-list-md>
         <router-view></router-view>
       </v-container>
     </v-content>

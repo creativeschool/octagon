@@ -17,8 +17,7 @@
 <script>
 import { connection } from '@/db'
 import { bus } from '@/plugins/bus'
-
-const { ObjectId } = require('mongodb')
+import { ObjectId } from 'mongodb'
 
 export default {
   name: 'courseEdit',

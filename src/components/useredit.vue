@@ -19,9 +19,8 @@
 <script>
 import { connection } from '@/db'
 import { bus } from '@/plugins/bus'
-
-const { ObjectId } = require('mongodb')
-const { pbkdf2Sync } = require('crypto')
+import { ObjectId } from 'mongodb'
+import { pbkdf2Sync } from 'crypto'
 
 export default {
   name: 'courseEdit',

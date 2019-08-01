@@ -1,6 +1,9 @@
 <template>
   <v-layout wrap align-content-start>
-    <v-flex xs12 class="pa-2">
+    <v-flex xs12>
+      <notice/>
+    </v-flex>
+    <v-flex xs12>
       <v-card>
         <v-card-text>
           构建时间： {{ build.date }}<br/>
@@ -8,7 +11,7 @@
         </v-card-text>
       </v-card>
     </v-flex>
-    <v-flex xs12 class="pa-2">
+    <v-flex xs12>
       <v-card>
         <v-card-text>
           驱动版本： {{ clientInfo.driver }}<br/>
@@ -27,11 +30,15 @@
 <script>
 import { connection } from '@/db/index'
 import { bus } from '@/plugins/bus'
+import notice from '@/components/notice.vue'
 
 /* global BUILD_DATE, BUILD_MACHINE */
 
 export default {
   name: 'home',
+  components: {
+    notice
+  },
   data: () => ({
     loading: true,
     clientInfo: {},
