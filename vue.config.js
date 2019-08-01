@@ -19,7 +19,7 @@ module.exports = {
   },
   pluginOptions: {
     electronBuilder: {
-      externals: ['mongodb'],
+      externals: ['mongodb', '!@mdi/font', '!escape-string-regexp', '!crypto-random-string'],
       builderOptions: {
         // eslint-disable-next-line no-template-curly-in-string
         artifactName: '${productName}-${version}-${platform}-${arch}.${ext}',
