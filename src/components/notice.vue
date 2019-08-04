@@ -14,7 +14,7 @@
             {{ formatDate(notice.updated) }}
           </v-chip>
           <v-spacer/>
-          <v-btn @click="id = notice._id.toString(); $vuetify.goTo($refs.editor)" outlined color="primary">编辑</v-btn>
+          <v-btn @click="id = notice._id.toString(); $vuetify.goTo($refs.editor); content = notice.content" outlined color="primary">编辑</v-btn>
         </v-card-actions>
       </v-card>
     </v-card-text>
