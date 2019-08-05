@@ -131,7 +131,7 @@ export const parseUCmapImport = async (path, present) => {
       const course = courseIds.get(name)._id
       const priv = { scope: '', msg: false }
       switch (present) {
-        case '学生': priv.scope = '/' + userIds.get(login).name; break
+        case '学生': priv.scope = '/' + userIds.get(login).name + '/'; break
         case '教师': priv.scope = '/'; priv.msg = true; break
       }
       data.push({ user, course, priv, created: now, updated: now })
