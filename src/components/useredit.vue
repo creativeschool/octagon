@@ -6,8 +6,21 @@
       <v-text-field :disabled="loading" v-model="user.name" label="姓名"/>
       <v-text-field :disabled="loading" v-model="user.login" label="登录号"/>
       <v-combobox :disabled="loading" v-model="user.tags" multiple chips label="标签"/>
-      <v-text-field :disabled="pwdLoading" v-model="password" label="新密码" placeholder="不更改请留空"/>
+      <v-text-field :disabled="loading" v-model="password" label="新密码" placeholder="不更改请留空"/>
     </v-card-text>
+    <template v-if="user.meta">
+      <v-divider/>
+      <v-card-text>
+        <v-text-field v-model.number="user.meta.stickyLogin" type="number" label="粘滞登录时间(毫秒)"/>
+        <v-layout wrap justify-space-around>
+          <v-checkbox v-model="user.meta.singleLogin" label="单一登录"/>
+          <v-checkbox v-model="user.meta.viewerHighRes" label="阅读器高分辨率"/>
+          <v-checkbox v-model="user.meta.viewerOfflineOff" label="禁用离线阅读器"/>
+        </v-layout>
+        <v-btn text @click="user.meta = { stickyLogin: 7 * 24 * 60 * 60 * 1000, singleLogin: true, viewerHighRes: false, viewerOfflineOff: false }">学生预设</v-btn>
+        <v-btn text @click="user.meta = { stickyLogin: 0, singleLogin: false, viewerHighRes: true, viewerOfflineOff: false }">教师预设</v-btn>
+      </v-card-text>
+    </template>
     <v-card-actions>
       <v-spacer/>
       <v-btn color="error" outlined @click="load" :disabled="loading">重置</v-btn>

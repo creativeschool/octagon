@@ -7,7 +7,7 @@ const cryptoRandomString = require('crypto-random-string')
 
 export const xlsxFilters = [{ name: '表格文件', extensions: ['xlsx'] }]
 
-export const parseUserImport = path => {
+export const parseUserImport = (path, meta) => {
   const book = XLSX.readFile(path)
   const sheet = book.Sheets[book.SheetNames[0]]
   const raw = XLSX.utils.sheet_to_json(sheet)
@@ -27,7 +27,8 @@ export const parseUserImport = path => {
           hash,
           salt,
           created: now,
-          updated: now
+          updated: now,
+          meta
         },
         pass,
         row: row.__rowNum__,

@@ -13,6 +13,19 @@
           若有需要，请事先备份数据库。<br/>
           确认无误后请点击提交按钮，操作将立即提交至数据库。<br/>
         </v-card-text>
+        <v-divider/>
+        <v-card-text>
+          <div class="subheader-1">访问控制</div>
+          <v-text-field v-model.number="meta.stickyLogin" type="number" label="粘滞登录时间(毫秒)"/>
+          <v-layout wrap justify-space-around>
+            <v-checkbox v-model="meta.singleLogin" label="单一登录"/>
+            <v-checkbox v-model="meta.viewerHighRes" label="阅读器高分辨率"/>
+            <v-checkbox v-model="meta.viewerOfflineOff" label="禁用离线阅读器"/>
+          </v-layout>
+          <v-btn text @click="meta = { stickyLogin: 7 * 24 * 60 * 60 * 1000, singleLogin: true, viewerHighRes: false, viewerOfflineOff: false }">学生预设</v-btn>
+          <v-btn text @click="meta = { stickyLogin: 0, singleLogin: false, viewerHighRes: true, viewerOfflineOff: false }">教师预设</v-btn>
+        </v-card-text>
+        <v-divider/>
         <v-card-actions>
           <v-btn color="success" outlined @click="openUrl('https://github.com/creativeschool/octagon/raw/master/example/%E7%94%A8%E6%88%B7%E5%AF%BC%E5%85%A5%E6%A0%B7%E8%A1%A8.xlsx')">下载导入样表</v-btn>
           <v-btn color="primary" outlined @click="loadFile">{{ data.length ? `重新导入` : '导入' }}</v-btn>
@@ -57,14 +70,20 @@ export default {
     loading: false,
     data: [],
     errors: [],
-    store: null
+    store: null,
+    meta: {
+      stickyLogin: 0,
+      singleLogin: false,
+      viewerHighRes: true,
+      viewerOfflineOff: true
+    }
   }),
   methods: {
     openUrl,
     loadFile () {
       remote.dialog.showOpenDialog(currentWindow, { filters: xlsxFilters }, paths => {
         if (!paths || !paths.length) return
-        const data = parseUserImport(paths[0])
+        const data = parseUserImport(paths[0], this.meta)
         remote.dialog.showSaveDialog(currentWindow, { filters: xlsxFilters, defaultPath: paths[0] + '结果.xlsx' }, path => {
           if (!path) return
           saveUserImport(path, data)
