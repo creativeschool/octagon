@@ -16,7 +16,7 @@
   },
   "main": "background.js",
   "dependencies": {
-    "mongodb": "^3.3.0-beta2"
+    "mongodb": "^3.4.1"
   },
   "devDependencies": {
     "@mdi/font": "^3.8.95",
